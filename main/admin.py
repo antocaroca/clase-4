@@ -1,5 +1,14 @@
 from django.contrib import admin
-from .models import Producto
+from django.utils.html import format_html
+from .models import Producto, ProductImage, ProducTag
 
-# Register your models here.
-admin.site.register(Producto)
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'active', 'description',)
+    list_filter = ('active', 'date_update',)
+    search_fields = ('name', )
+
+
+admin.site.register(Producto, ProductAdmin)
+admin.site.register(ProductImage)
+admin.site.register(ProducTag)
